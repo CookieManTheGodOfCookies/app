@@ -27,7 +27,8 @@ class ApplicationSendController extends Controller
 
         $this->validate($app, [
             'theme' => 'required|max:255',
-            'message' => 'required|max:255'
+            'message' => 'required|max:255',
+            'file' => 'max:500000'
         ]);
 
         $application = new application;

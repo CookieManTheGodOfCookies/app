@@ -44,6 +44,11 @@
                                     <span>{{$errors->first('timeError')}}</span>
                                 </div>
                             @endif
+                            @if($errors->has('file'))
+                                <div class="alert alert-danger">
+                                    <span>{{$errors->first('file')}}</span>
+                                </div>
+                            @endif
                         </div>
                         <div class="panel-footer">
                             <div class="form-group">
