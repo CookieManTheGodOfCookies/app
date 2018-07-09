@@ -5,7 +5,7 @@
         <div class="container">
             <div class="col-sm-6">
                 <div class="panel panel-default">
-                    <form method="post" action="{{ url('/send') }}">
+                    <form method="post" action="{{ url('/send') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="panel-heading">
                             Feedback form
@@ -23,12 +23,16 @@
                             <div class="form-group {{ $errors->has('message') ? ' has-error' : '' }}">
                                 <label for="message" class="control-label">Message</label>
                                 <textarea id="message" name="message" class="form-control"
-                                          style="line-height: 5"></textarea>
+                                          style="min-height: 150px;"></textarea>
                                 @if($errors->has('message'))
                                     <div class="help-block">
                                         {{ $errors->first('message') }}
                                     </div>
                                 @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="attachedFile" class="control-label">Attach a file</label>
+                                <input type="file" name="file" id="attachedFile">
                             </div>
                             @if(session()->has('status'))
                                 <div class="alert alert-success">
@@ -66,6 +70,11 @@
                                 </div>
                                 <div class="panel-body">
                                     {{$application->message}}
+                                    @if($application->attached_filename !== 'NULL')
+                                    <span style="float: right">
+                                        <a href="/download/{{$application->attached_filename}}">Прикрепленный файл</a>
+                                    </span>
+                                    @endif
                                 </div>
                                 <div class="panel-footer">
                                     {{----}}
@@ -107,6 +116,11 @@
                                             <button type="submit" class="btn btn-danger">Uncheck</button>
                                         @else
                                             <button type="submit" class="btn btn-primary">Check</button>
+                                        @endif
+                                        @if($application->attached_filename !== 'NULL')
+                                        <span style="float: right;">
+                                            <a href="/download/{{$application->attached_filename}}">Файл</a>
+                                        </span>
                                         @endif
                                     </form>
                                 </div>

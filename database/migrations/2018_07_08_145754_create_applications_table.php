@@ -19,6 +19,7 @@ class CreateApplicationsTable extends Migration
             $table->string('message');
             $table->integer('user_id')->unsigned();
             $table->boolean('checked_by_manager')->default(0);
+            $table->string('attached_filename')->nullable();
             // TODO: разобраться со ссылкой на прикрепленный файл
             $table->timestamps();
         });

@@ -24,3 +24,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/send', 'ApplicationSendController@store');
 
 Route::get('/changeChecked', 'CheckChange@check');
+
+Route::get('/download/{filename}', 'Downloader@downloadAttached');
